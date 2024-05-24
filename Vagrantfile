@@ -5,21 +5,21 @@ vm_list = [
     "name" => "vagrant.kuber.master",
     "type" => "master",
     "cpu" => "2",
-    "mem" => "2048",
+    "mem" => "4048",
     "ip_addr" => master_ip,
   },
   {
     "name" => "vagrant.kuber.node1",
     "type" => "node",
     "cpu" => "2",
-    "mem" => "2048",
+    "mem" => "4048",
     "ip_addr" => "10.0.0.31",
   },
   {
     "name" => "vagrant.kuber.node2",
     "type" => "node",
     "cpu" => "2",
-    "mem" => "2048",
+    "mem" => "4048",
     "ip_addr" => "10.0.0.32",
   }
 ]

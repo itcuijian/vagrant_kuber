@@ -46,6 +46,8 @@ EOF
 
 # 安装 Docker kubelet kubeadm
 apt update && apt install -y docker-ce docker-ce-cli containerd.io kubelet kubeadm kubectl
+# 锁定版本
+apt-mark hold kubeadm kubelet kubectl
 
 # 启动 Docker
 systemctl start docker
