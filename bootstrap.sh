@@ -72,6 +72,6 @@ systemctl restart containerd.service
 cp /vagrant/kubeadm.yaml /etc/kubernetes/kubeadm.yaml
 cat >> /etc/kubernetes/kubeadm.yaml <<EOF
 localAPIEndpoint:
-  advertiseAddress: {$2}
+  advertiseAddress: $2
   bindPort: 6443
 EOF
