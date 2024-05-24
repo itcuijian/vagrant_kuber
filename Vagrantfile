@@ -1,10 +1,12 @@
+master_ip = "10.0.0.30"
+
 vm_list = [
   {
     "name" => "vagrant.kuber.master",
     "type" => "master",
     "cpu" => "2",
     "mem" => "2048",
-    "ip_addr" => "10.0.0.30",
+    "ip_addr" => master_ip,
   },
   {
     "name" => "vagrant.kuber.node1",
@@ -34,6 +36,9 @@ Vagrant.configure("2") do |config|
 
       node.vm.box_check_update = false
 
+      # 设置同步目录
+      node.vm.synced_folder ".", "/vagrant", type: "virtualbox"
+
       # 设置hostname
       node.vm.hostname = item["name"]
 
@@ -42,7 +47,7 @@ Vagrant.configure("2") do |config|
 
       # 执行shell脚本
       node.vm.provision "shell" do |script|
-        script.path = "/usr/bin/echo"   #脚本路径
+        script.path = "bootstrap.sh"     #脚本路径
         script.args = [ item["type"] ]   #传递参数
       end
     end
