@@ -1,8 +1,5 @@
 #!/bin/bash
 
-init() {
-}
-
 # 设置阿里云源
 cat <<EOF | tee /etc/apt/source.list
 deb http://mirrors.cloud.aliyuncs.com/ubuntu/ jammy main restricted
