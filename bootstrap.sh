@@ -33,8 +33,8 @@ curl -s https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | sudo apt-key
  
 #  添加Kubernetes的APT仓库
 cat <<EOF | tee /etc/apt/sources.list.d/kubernetes.list
-deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-jammy main
+deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
 EOF
 
 # 安装 Docker
-apt-get update && apt-get install -y kubelet kubeadm kubectl
+apt update && apt install -y kubelet kubeadm kubectl
