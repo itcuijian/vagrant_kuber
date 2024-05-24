@@ -69,9 +69,15 @@ sed -i 's/^disabled_plugins/#&/' /etc/containerd/config.toml
 systemctl restart containerd.service
 
 # 添加 kubeadm 启动配置
-cp /vagrant/kubeadm.yaml /etc/kubernetes/kubeadm.yaml
-cat >> /etc/kubernetes/kubeadm.yaml <<EOF
+cat <<EOF | tee /etc/kubernetes/kubeadm.yaml 
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: InitConfiguration
+nodeRegistration:
+  name: "$1"
 localAPIEndpoint:
   advertiseAddress: $2
   bindPort: 6443
+---
 EOF
+
+cat /vagrant/kubeadm.yaml >> /etc/kubernetes/kubeadm.yaml
