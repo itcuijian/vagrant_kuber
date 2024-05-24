@@ -49,23 +49,29 @@ apt update && apt install -y docker-ce docker-ce-cli containerd.io kubelet kubea
 # 锁定版本
 apt-mark hold kubeadm kubelet kubectl
 
-# 启动 Docker
-systemctl start docker
-
 # 修改 /etc/containerd/config.toml 开启 cri
 # issue: https://github.com/containerd/containerd/issues/8139
 sed -i 's/^disabled_plugins/#&/' /etc/containerd/config.toml 
-cat >> /etc/containerd/config.toml <<EOF 
-version = 2
-[plugins]
-  [plugins."io.containerd.grpc.v1.cri"]
-    sandbox_image = "registry.aliyuncs.com/google_containers/pause:3.9"
-    [plugins."io.containerd.grpc.v1.cri".containerd]
-      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
-        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
-          runtime_type = "io.containerd.runc.v2"
-          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
-            SystemdCgroup = true
-EOF
+# cat >> /etc/containerd/config.toml <<EOF 
+# version = 2
+# [plugins]
+#   [plugins."io.containerd.grpc.v1.cri"]
+#     sandbox_image = "registry.aliyuncs.com/google_containers/pause:3.9"
+#     [plugins."io.containerd.grpc.v1.cri".containerd]
+#       [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+#         [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+#           runtime_type = "io.containerd.runc.v2"
+#           [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+#             SystemdCgroup = true
+# EOF
 
+# 重启 containerd
 systemctl restart containerd.service
+
+# 添加 kubeadm 启动配置
+cp /vagrant/kubeadm.yaml /etc/kubernetes/kubeadm.yaml
+cat >> /etc/kubernetes/kubeadm.yaml <<EOF
+localAPIEndpoint:
+  advertiseAddress: {$2}
+  bindPort: 6443
+EOF

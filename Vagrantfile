@@ -48,7 +48,7 @@ Vagrant.configure("2") do |config|
       # 执行shell脚本
       node.vm.provision "shell" do |script|
         script.path = "bootstrap.sh"     #脚本路径
-        script.args = [ item["type"] ]   #传递参数
+        script.args = [ item["type"], item["ip_addr"] ]   #传递参数
       end
     end
   end
