@@ -44,5 +44,12 @@ cat <<EOF | tee /etc/apt/sources.list.d/docker.list
 deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable
 EOF
 
-# 安装 Docker
+# 安装 Docker kubelet kubeadm
 apt update && apt install -y docker-ce docker-ce-cli containerd.io kubelet kubeadm kubectl
+
+# 启动 Docker
+systemctl start docker
+
+# 修改 /etc/containerd/config.toml 开启 cri
+# issue: https://github.com/containerd/containerd/issues/8139
+sed -i 's/^disabled_plugins/enabled_plugins/' /etc/fstab && systemctl restart containerd.service
