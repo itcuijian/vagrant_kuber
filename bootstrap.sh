@@ -29,11 +29,11 @@ sed -ri '/\sswap\s/s/^#?/#/' /etc/fstab
 swapoff -a
 
 #  添加Google的GPG密钥
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+curl -s https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | sudo apt-key add -
  
 #  添加Kubernetes的APT仓库
-tee /etc/apt/sources.list.d/kubernetes.list << EOF
-deb https://apt.kubernetes.io/ kubernetes-xenial main
+cat <<EOF | tee /etc/apt/sources.list.d/kubernetes.list
+deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-jammy main
 EOF
 
 # 安装 Docker
