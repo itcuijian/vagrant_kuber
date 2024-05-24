@@ -52,18 +52,18 @@ apt-mark hold kubeadm kubelet kubectl
 # 修改 /etc/containerd/config.toml 开启 cri
 # issue: https://github.com/containerd/containerd/issues/8139
 sed -i 's/^disabled_plugins/#&/' /etc/containerd/config.toml 
-# cat >> /etc/containerd/config.toml <<EOF 
-# version = 2
-# [plugins]
-#   [plugins."io.containerd.grpc.v1.cri"]
-#     sandbox_image = "registry.aliyuncs.com/google_containers/pause:3.9"
-#     [plugins."io.containerd.grpc.v1.cri".containerd]
-#       [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
-#         [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
-#           runtime_type = "io.containerd.runc.v2"
-#           [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
-#             SystemdCgroup = true
-# EOF
+cat >> /etc/containerd/config.toml <<EOF 
+version = 2
+[plugins]
+  [plugins."io.containerd.grpc.v1.cri"]
+    sandbox_image = "registry.aliyuncs.com/google_containers/pause:3.9"
+    [plugins."io.containerd.grpc.v1.cri".containerd]
+      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+          runtime_type = "io.containerd.runc.v2"
+          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+            SystemdCgroup = true
+EOF
 
 # 重启 containerd
 systemctl restart containerd.service
