@@ -25,8 +25,8 @@ deb-src http://mirrors.cloud.aliyuncs.com/ubuntu jammy-security multiverse
 EOF
 
 # 关闭交换分区
-sed -i 's/^swap/#&/' /etc/fstab
+sed -ri '/\sswap\s/s/^#?/#/' /etc/fstab
 swapoff -a
 
 # 安装 Docker
-apt update && apt install kubelet kubeadm kubectl
+apt-get update && apt-get install -y kubelet kubeadm kubectl
