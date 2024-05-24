@@ -28,5 +28,13 @@ EOF
 sed -ri '/\sswap\s/s/^#?/#/' /etc/fstab
 swapoff -a
 
+#  添加Google的GPG密钥
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+ 
+#  添加Kubernetes的APT仓库
+tee /etc/apt/sources.list.d/kubernetes.list << EOF
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+
 # 安装 Docker
 apt-get update && apt-get install -y kubelet kubeadm kubectl
