@@ -99,7 +99,7 @@ echo 1 > /proc/sys/net/ipv4/ip_forward
 
 # 添加节点IP分配
 cat <<EOF | tee /etc/default/kubelet
-KUBELET_EXTRA_ARGS="--node-ip=$1"
+KUBELET_EXTRA_ARGS="--node-ip=$2"
 EOF
 
 # 重启 kubelet

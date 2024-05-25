@@ -1,3 +1,3 @@
 # kubeadm join
-kubeadm join 10.0.0.30:6443 --token tidjzi.aodv89tq5dz6oyiy \
-        --discovery-token-ca-cert-hash sha256:454fbc3969d421eee58e21309149b7a0ca45bb55e4d7cc1bb286cc2e744e9e5b
+kubeadm join 10.0.0.30:6443 --token rxsn6m.5vm2atjtoedn3acc \
+        --discovery-token-ca-cert-hash sha256:9f8c21ed1d1e90247db3e7acf68a69c830f7b730fefef9561755c97b65012277
