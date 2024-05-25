@@ -97,3 +97,9 @@ systemctl restart containerd.service
 # 启动 br_netfilter
 modprobe br_netfilter
 echo 1 > /proc/sys/net/ipv4/ip_forward
+
+# 添加节点IP分配
+cat <<EOF | tee /etc/default/kubelet
+KUBELET_EXTRA_ARGS="--node-ip=$1"
+EOF
+
