@@ -48,10 +48,32 @@ cat <<EOF | tee /etc/apt/sources.list.d/helm-stable-debian.list
 deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main
 EOF
 
-# 安装 Docker kubelet kubeadm helm
-apt update && apt install -y docker-ce docker-ce-cli containerd.io kubelet kubeadm kubectl helm
-# 锁定版本
-apt-mark hold kubeadm kubelet kubectl
+if ["$1" == "master"]; then
+  # 安装 Docker kubelet kubeadm helm
+  apt update && apt install -y containerd.io kubelet kubeadm kubectl helm
+  # 锁定版本
+  apt-mark hold kubeadm kubelet kubectl
+
+  # 添加 kubeadm 启动配置
+  cat <<EOF | tee /etc/kubernetes/kubeadm.yaml 
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: InitConfiguration
+nodeRegistration:
+  name: "$1"
+localAPIEndpoint:
+  advertiseAddress: $2
+  bindPort: 6443
+---
+EOF
+
+  cat /vagrant/kubeadm.yaml >> /etc/kubernetes/kubeadm.yaml
+
+else
+  # 安装 kubelet kubeadm helm
+  apt update && apt install -y containerd.io kubelet kubeadm
+  # 锁定版本
+  apt-mark hold kubeadm kubelet
+fi
 
 # 修改 /etc/containerd/config.toml 开启 cri
 # issue: https://github.com/containerd/containerd/issues/8139
@@ -72,16 +94,3 @@ EOF
 # 重启 containerd
 systemctl restart containerd.service
 
-# 添加 kubeadm 启动配置
-cat <<EOF | tee /etc/kubernetes/kubeadm.yaml 
-apiVersion: kubeadm.k8s.io/v1beta3
-kind: InitConfiguration
-nodeRegistration:
-  name: "$1"
-localAPIEndpoint:
-  advertiseAddress: $2
-  bindPort: 6443
----
-EOF
-
-cat /vagrant/kubeadm.yaml >> /etc/kubernetes/kubeadm.yaml
