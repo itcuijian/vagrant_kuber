@@ -48,7 +48,6 @@ cat <<EOF | tee /etc/apt/sources.list.d/helm-stable-debian.list
 deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main
 EOF
 
-echo "$1"
 if [ "$1" == "master" ]; then
   # 安装 Docker kubelet kubeadm helm
   apt update && apt install -y containerd.io kubelet kubeadm kubectl helm
@@ -95,3 +94,6 @@ EOF
 # 重启 containerd
 systemctl restart containerd.service
 
+# 启动 br_netfilter
+modprobe br_netfilter
+echo 1 > /proc/sys/net/ipv4/ip_forward
