@@ -8,7 +8,7 @@ Vagrant.require_version '>= 2.4.1'
 # requires
 require 'yaml'
 
-configs = YAML.loadfile('.config.yaml')
+configs = YAML.load_file('.config.yaml')
 vm_list = configs['nodes']
 
 Vagrant.configure(configs['apiVersion']) do |config|
