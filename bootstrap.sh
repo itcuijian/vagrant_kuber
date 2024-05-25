@@ -29,23 +29,27 @@ sed -ri '/\sswap\s/s/^#?/#/' /etc/fstab
 swapoff -a
 
 #  添加Google的GPG密钥
-curl -s https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | sudo apt-key add -
+curl -s https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -
  
 # 添加Kubernetes的APT仓库
 cat <<EOF | tee /etc/apt/sources.list.d/kubernetes.list
 deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
 EOF
 
-# 添加阿里云 Docker 的 GPG 密钥
-curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-
-# 添加 docker 的阿里云源
+# 添加阿里云 Docker 的 GPG 密钥，添加 docker 的阿里云源
+curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 cat <<EOF | tee /etc/apt/sources.list.d/docker.list
 deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable
 EOF
 
-# 安装 Docker kubelet kubeadm
-apt update && apt install -y docker-ce docker-ce-cli containerd.io kubelet kubeadm kubectl
+# 添加 helm 的APT仓库
+curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | tee /usr/share/keyrings/helm.gpg > /dev/null
+cat <<EOF | tee /etc/apt/sources.list.d/helm-stable-debian.list
+deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main
+EOF
+
+# 安装 Docker kubelet kubeadm helm
+apt update && apt install -y docker-ce docker-ce-cli containerd.io kubelet kubeadm kubectl helm
 # 锁定版本
 apt-mark hold kubeadm kubelet kubectl
 

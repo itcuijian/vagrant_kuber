@@ -3,6 +3,7 @@ master_ip = "10.0.0.30"
 vm_list = [
   {
     "name" => "vagrant.kuber.master",
+    "hostname" => "master",
     "type" => "master",
     "cpu" => "2",
     "mem" => "4048",
@@ -10,6 +11,7 @@ vm_list = [
   },
   {
     "name" => "vagrant.kuber.node1",
+    "hostname" => "node1",
     "type" => "node",
     "cpu" => "2",
     "mem" => "4048",
@@ -17,6 +19,7 @@ vm_list = [
   },
   {
     "name" => "vagrant.kuber.node2",
+    "hostname" => "node2",
     "type" => "node",
     "cpu" => "2",
     "mem" => "4048",
@@ -40,7 +43,7 @@ Vagrant.configure("2") do |config|
       node.vm.synced_folder ".", "/vagrant", type: "virtualbox"
 
       # 设置hostname
-      node.vm.hostname = item["name"]
+      node.vm.hostname = item["hostname"]
 
       # 设置IP
       node.vm.network "public_network", ip: item["ip_addr"], bridge: "enp86s0", auto_config: true
