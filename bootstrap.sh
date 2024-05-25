@@ -28,18 +28,16 @@ EOF
 sed -ri '/\sswap\s/s/^#?/#/' /etc/fstab
 swapoff -a
 
-#  添加Google的GPG密钥
-curl -s https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -
- 
 # 添加Kubernetes的APT仓库
+curl -fsSL https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | gpg --dearmor | tee /usr/share/keyrings/kubernetes-apt-keyring.gpg > /dev/null
 cat <<EOF | tee /etc/apt/sources.list.d/kubernetes.list
-deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
+deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/kubernetes-apt-keyring.gpg] https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
 EOF
 
 # 添加阿里云 Docker 的 GPG 密钥，添加 docker 的阿里云源
-curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | gpg --dearmor | tee /usr/share/keyrings/docker-archive-keyring.gpg > /dev/null
 cat <<EOF | tee /etc/apt/sources.list.d/docker.list
-deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable
+deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable
 EOF
 
 # 添加 helm 的APT仓库
@@ -78,6 +76,7 @@ fi
 # 修改 /etc/containerd/config.toml 开启 cri
 # issue: https://github.com/containerd/containerd/issues/8139
 sed -i 's/^disabled_plugins/#&/' /etc/containerd/config.toml 
+# 将 cgroups 设置为 SystemdCgroup
 cat >> /etc/containerd/config.toml <<EOF 
 version = 2
 [plugins]
@@ -102,4 +101,7 @@ echo 1 > /proc/sys/net/ipv4/ip_forward
 cat <<EOF | tee /etc/default/kubelet
 KUBELET_EXTRA_ARGS="--node-ip=$1"
 EOF
+
+# 重启 kubelet
+systemctl restart kubelet
 

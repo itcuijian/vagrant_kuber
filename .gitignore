@@ -54,3 +54,5 @@ Thumbs.db
 # vagrant
 .vagrant/
 
+# config file
+.config.yaml

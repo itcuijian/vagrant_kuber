@@ -1,33 +1,17 @@
-master_ip = "10.0.0.30"
+# encoding: utf-8
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
 
-vm_list = [
-  {
-    "name" => "vagrant.kuber.master",
-    "hostname" => "master",
-    "type" => "master",
-    "cpu" => "2",
-    "mem" => "4048",
-    "ip_addr" => master_ip,
-  },
-  {
-    "name" => "vagrant.kuber.node1",
-    "hostname" => "node1",
-    "type" => "node",
-    "cpu" => "2",
-    "mem" => "4048",
-    "ip_addr" => "10.0.0.31",
-  },
-  {
-    "name" => "vagrant.kuber.node2",
-    "hostname" => "node2",
-    "type" => "node",
-    "cpu" => "2",
-    "mem" => "4048",
-    "ip_addr" => "10.0.0.32",
-  }
-]
+# Specify minimum Vagrant version and Vagrant API version
+Vagrant.require_version '>= 2.4.1'
 
-Vagrant.configure("2") do |config|
+# requires
+require 'yaml'
+
+configs = YAML.loadfile('.config.yaml')
+vm_list = configs['nodes']
+
+Vagrant.configure(configs['apiVersion']) do |config|
   config.vm.box = "ubuntu/jammy64"
   vm_list.each do |item|
     config.vm.define item["name"] do |node|
@@ -46,12 +30,12 @@ Vagrant.configure("2") do |config|
       node.vm.hostname = item["hostname"]
 
       # 设置IP
-      node.vm.network "public_network", ip: item["ip_addr"], bridge: "enp86s0", auto_config: true
+      node.vm.network "public_network", ip: item["ipAddr"], bridge: configs['bridge'], auto_config: true
 
       # 执行shell脚本
       node.vm.provision "shell" do |script|
         script.path = "bootstrap.sh"     #脚本路径
-        script.args = [ item["type"], item["ip_addr"] ]   #传递参数
+        script.args = [ item["type"], item["ipAddr"] ]   #传递参数
       end
     end
   end
