@@ -73,6 +73,8 @@ else
   apt-mark hold kubeadm kubelet
 fi
 
+apt-get install -y lvm2
+
 # 修改 /etc/containerd/config.toml 开启 cri
 # issue: https://github.com/containerd/containerd/issues/8139
 sed -i 's/^disabled_plugins/#&/' /etc/containerd/config.toml 

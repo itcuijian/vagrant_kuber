@@ -13,13 +13,13 @@ spec:
         app: nginx
     spec:
       containers:
-        - name: nginx
-          image: nginx:1.8
-          volumeMounts:
-            - mountPath: "/usr/share/nginx/html"
-              name: nginx-vol
-          ports:
-            - containerPort: 80
+      - name: nginx
+        image: nginx:1.8
+        volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: nginx-vol
+        ports:
+        - containerPort: 80
       volumes:
-        - name: nginx-vol
-          emptyDir: {}
+      - name: nginx-vol
+        emptyDir: {}

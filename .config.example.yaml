@@ -3,23 +3,23 @@ apiVersion: 2
 # which network is used
 bridge: enp86s0
 nodes:
-  - name: "vagrant.kuber.master"
-    hostname: master
-    type: master
-    ipAddr: 10.0.0.30
-    # virtualbox vbox.cpus
-    cpu: 2
-    # virtualbox vbox.memory
-    mem: 4096
-  - name: "vagrant.kuber.node1"
-    hostname: node1
-    type: node
-    ipAddr: 10.0.0.31
-    cpu: 2
-    mem: 4096
-  - name: "vagrant.kuber.node2"
-    hostname: node2
-    type: node
-    ipAddr: 10.0.0.32
-    cpu: 2
-    mem: 4096
+- name: "vagrant.kuber.master"
+  hostname: master
+  type: master
+  ipAddr: 10.0.0.30
+  # virtualbox vbox.cpus
+  cpu: 2
+  # virtualbox vbox.memory
+  mem: 4096
+- name: "vagrant.kuber.node1"
+  hostname: node1
+  type: node
+  ipAddr: 10.0.0.31
+  cpu: 2
+  mem: 4096
+- name: "vagrant.kuber.node2"
+  hostname: node2
+  type: node
+  ipAddr: 10.0.0.32
+  cpu: 2
+  mem: 4096
