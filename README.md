@@ -72,7 +72,7 @@ vagrant ssh [node_name]
 
 其中 `node_name` 是 `worker` 节点的名字，配置在 `.config.yaml` 里面。
 
-在进入 `Worker` 节点之后，切换到 `root` 用户，执行上面保存好的指令：
+在进入 `Worker` 节点之后，切换到 `root` 用户，执行上面保存好 `kubeadm join` 的指令：
 
 ```
 kubeadm join 10.0.0.30:6443 --token 00bwbx.uvnaa2ewjflwu1ry \
