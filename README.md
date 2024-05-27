@@ -75,7 +75,7 @@ vagrant ssh [node_name]
 在进入 `Worker` 节点之后，切换到 `root` 用户，执行上面保存好的指令：
 
 ```
-kubeadm join 10.0.0.30:6443 --token 00bwbx.uvnaa2ewjflwu1ry 
+kubeadm join 10.0.0.30:6443 --token 00bwbx.uvnaa2ewjflwu1ry \
          --discovery-token-ca-cert-hash sha256:00eb62a2a6020f94132e3fe1ab721349bbcd3e9b94da9654cfe15f2985ebd711
 ```
 
