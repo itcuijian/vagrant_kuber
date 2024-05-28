@@ -29,9 +29,9 @@ vagrant up
 vagrant ssh [master_name]
 ```
 
-其中 `master_name` 为 `Master` 节点的名字，在 `.config.yaml` 里面配置。
+> 其中 `master_name` 为 `Master` 节点的名字，在 `.config.yaml` 里面配置。
 
-进入到 `Master` 节点之后，切换到 `root` 用户，通过一下节点来启动 `Kubernetes` ：
+进入到 `Master` 节点之后，切换到 `root` 用户，通过下面的指令来启动 `Kubernetes` ：
 
 ```
 kubeadm init --config /etc/kubernetes/kubeadm.yaml
@@ -72,7 +72,7 @@ kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/
 vagrant ssh [node_name]
 ```
 
-其中 `node_name` 是 `Worker` 节点的名字，配置在 `.config.yaml` 里面。
+> 其中 `node_name` 是 `Worker` 节点的名字，配置在 `.config.yaml` 里面。
 
 在进入 `Worker` 节点之后，切换到 `root` 用户，执行上面保存好 `kubeadm join` 的指令：
 
