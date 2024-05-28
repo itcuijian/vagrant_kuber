@@ -64,13 +64,13 @@ kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/
 
 ### 部署 Kubernetes 的 Worker 节点 ###
 
-首先进入到 `worker` 节点：
+首先进入到 `Worker` 节点：
 
 ```
 vagrant ssh [node_name]
 ```
 
-其中 `node_name` 是 `worker` 节点的名字，配置在 `.config.yaml` 里面。
+其中 `node_name` 是 `Worker` 节点的名字，配置在 `.config.yaml` 里面。
 
 在进入 `Worker` 节点之后，切换到 `root` 用户，执行上面保存好 `kubeadm join` 的指令：
 
