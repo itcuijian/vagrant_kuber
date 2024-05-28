@@ -40,8 +40,8 @@ kubeadm init --config /etc/kubernetes/kubeadm.yaml
 该启动指令的最后会输出一个 `kubeadm join` 指令，该指令就是将 `Worker` 节点加入到集群的指令：
 
 ```
-kubeadm join 10.0.0.30:6443 --token [token] \
-        --discovery-token-ca-cert-hash sha256:[sha256]
+kubeadm join 10.0.0.30:6443 --token 00bwbx.uvnaa2ewjflwu1ry \
+         --discovery-token-ca-cert-hash sha256:00eb62a2a6020f94132e3fe1ab721349bbcd3e9b94da9654cfe15f2985ebd711
 ```
 
 将该指令保存好，以后部署 `Worker` 节点的时候会用到。
