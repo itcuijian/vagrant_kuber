@@ -46,6 +46,8 @@ kubeadm join 10.0.0.30:6443 --token [token] \
 
 将该指令保存好，以后部署 `Worker` 节点的时候会用到。
 
+> `10.0.0.30` 为 `Master` 节点的 IP 地址。
+
 启动完成之后可以保存好 `Kubernetes` 集群的安全配置文件到 `.kube` 目录下：
 
 ```

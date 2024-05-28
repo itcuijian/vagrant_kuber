@@ -6,6 +6,7 @@ nodes:
 - name: "vagrant.kuber.master"
   hostname: master
   type: master
+  # 节点的 IP 地址
   ipAddr: 10.0.0.30
   # virtualbox vbox.cpus
   cpu: 2
