@@ -120,3 +120,7 @@ EOF
 
 # 重启生效
 sudo sysctl --system
+
+# 开启时间同步
+sudo timedatectl set-ntp on
+sudo timedatectl set-timezone Asia/Shanghai
