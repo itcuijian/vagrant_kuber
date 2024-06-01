@@ -24,3 +24,9 @@ nodes:
   ipAddr: 10.0.0.32
   cpu: 2
   mem: 4096
+- name: "vagrant.kuber.node3"
+  hostname: node3
+  type: node
+  ipAddr: 10.0.0.33
+  cpu: 2
+  mem: 4096
