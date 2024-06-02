@@ -104,6 +104,7 @@ sudo systemctl restart kubelet
 
 # 加载 br_netfilter 内核模块，临时修改，重启失效
 sudo modprobe br_netfilter
+sudo modprobe rbd
 sudo echo 1 > /proc/sys/net/ipv4/ip_forward
 
 # 开机自动设置 ip_forward 为 1
@@ -116,6 +117,7 @@ EOF
 # 开机自动加载 br_netfilter 内核模块
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 br_netfilter
+rbd
 EOF
 
 # 重启生效
