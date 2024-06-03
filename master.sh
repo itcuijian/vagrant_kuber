@@ -15,8 +15,15 @@ helm upgrade --install kubernetes-dashboard kubernetes-dashboard/kubernetes-dash
 # kubectl -n kubernetes-dashboard port-forward svc/kubernetes-dashboard-kong-proxy 8443:443
 
 # 存储插件
+sudo apt install ceph-common
+
 kubectl apply -f https://raw.githubusercontent.com/rook/rook/master/deploy/examples/crds.yaml
 kubectl apply -f https://raw.githubusercontent.com/rook/rook/master/deploy/examples/common.yaml
 kubectl apply -f https://raw.githubusercontent.com/rook/rook/master/deploy/examples/operator.yaml
 kubectl apply -f https://raw.githubusercontent.com/rook/rook/master/deploy/examples/cluster.yaml
-
+# 设置镜像源
+# ROOK_CSI_REGISTRAR_IMAGE: "registry.aliyuncs.com/google_containers/csi-node-driver-registrar:v2.10.1"
+# ROOK_CSI_RESIZER_IMAGE: "registry.aliyuncs.com/google_containers/csi-resizer:v1.10.1"
+# ROOK_CSI_PROVISIONER_IMAGE: "registry.aliyuncs.com/google_containers/csi-provisioner:v4.0.1"
+# ROOK_CSI_SNAPSHOTTER_IMAGE: "registry.aliyuncs.com/google_containers/csi-snapshotter:v7.0.2"
+# ROOK_CSI_ATTACHER_IMAGE: "registry.aliyuncs.com/google_containers/csi-attacher:v4.5.1"

@@ -126,3 +126,7 @@ sudo sysctl --system
 # 开启时间同步
 sudo timedatectl set-ntp on
 sudo timedatectl set-timezone Asia/Shanghai
+
+# 关闭防火墙
+sudo systemctl stop ufw
+sudo systemctl disable ufw
