@@ -1,0 +1,15 @@
+# https://kubernetes.io/docs/concepts/configuration/configmap/
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+data:
+  master.cnf: |
+    [mysqld]
+    log-bin
+  slave.cnf: |
+    [mysqld]
+    super-read-only
+
