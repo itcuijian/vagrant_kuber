@@ -6,7 +6,7 @@ mkdir -p $HOME/.kube && cp -i /etc/kubernetes/admin.conf $HOME/.kube/config && c
 
 # 网络插件
 # 需要修改网卡 `--iface=enp0s8`
-kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+kubectl apply -f /vagrant/examples/flannel/kube-flannel.yml
 
 # 安装面板工具
 # kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
