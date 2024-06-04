@@ -5,6 +5,7 @@ kubeadm init --config /etc/kubernetes/kubeadm.yaml
 mkdir -p $HOME/.kube && cp -i /etc/kubernetes/admin.conf $HOME/.kube/config && chown $(id -u):$(id -g) $HOME/.kube/config
 
 # 网络插件
+# 需要修改网卡 `--iface=enp0s8`
 kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
 
 # 安装面板工具
@@ -15,15 +16,16 @@ helm upgrade --install kubernetes-dashboard kubernetes-dashboard/kubernetes-dash
 # kubectl -n kubernetes-dashboard port-forward svc/kubernetes-dashboard-kong-proxy 8443:443
 
 # 存储插件
-sudo apt install ceph-common
+# sudo apt install ceph-common
 
 kubectl apply -f https://raw.githubusercontent.com/rook/rook/master/deploy/examples/crds.yaml
 kubectl apply -f https://raw.githubusercontent.com/rook/rook/master/deploy/examples/common.yaml
 kubectl apply -f https://raw.githubusercontent.com/rook/rook/master/deploy/examples/operator.yaml
 kubectl apply -f https://raw.githubusercontent.com/rook/rook/master/deploy/examples/cluster.yaml
-# 设置镜像源
-# ROOK_CSI_REGISTRAR_IMAGE: "registry.aliyuncs.com/google_containers/csi-node-driver-registrar:v2.10.1"
-# ROOK_CSI_RESIZER_IMAGE: "registry.aliyuncs.com/google_containers/csi-resizer:v1.10.1"
-# ROOK_CSI_PROVISIONER_IMAGE: "registry.aliyuncs.com/google_containers/csi-provisioner:v4.0.1"
-# ROOK_CSI_SNAPSHOTTER_IMAGE: "registry.aliyuncs.com/google_containers/csi-snapshotter:v7.0.2"
-# ROOK_CSI_ATTACHER_IMAGE: "registry.aliyuncs.com/google_containers/csi-attacher:v4.5.1"
+# 设置镜像源，给 operator.yaml 添加以下内容，去掉前面的注释
+# ROOK_CSI_REGISTRAR_IMAGE: "registry.aliyuncs.com/google_containers/csi-node-driver-registrar:v2.8.0"
+# ROOK_CSI_RESIZER_IMAGE: "registry.aliyuncs.com/google_containers/csi-resizer:v1.8.0"
+# ROOK_CSI_PROVISIONER_IMAGE: "registry.aliyuncs.com/google_containers/csi-provisioner:v3.5.0"
+# ROOK_CSI_SNAPSHOTTER_IMAGE: "registry.aliyuncs.com/google_containers/csi-snapshotter:v6.2.2"
+# ROOK_CSI_ATTACHER_IMAGE: "registry.aliyuncs.com/google_containers/csi-attacher:v4.3.0"
+
