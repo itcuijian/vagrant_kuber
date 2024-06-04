@@ -62,6 +62,8 @@ mkdir -p $HOME/.kube && cp -i /etc/kubernetes/admin.conf $HOME/.kube/config && c
 kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
 ```
 
+> 注意：如果需要修改网卡的话，需要在相关容器里添加 `--iface=XXX` 的启动参数
+
 其他 `Kubernetes` 插件可以参考 `master.sh` 来自己部署。
 
 ### 部署 Kubernetes 的 Worker 节点 ###
