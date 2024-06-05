@@ -29,7 +29,7 @@ spec:
           ordinal=${BASH_REMATCH[1]}
           echo [mysqld] > /mnt/conf.d/server-id.cnf
           # 由于 server-0 有特殊意义，给 ID 加上 100 来避开
-          echo servier-id=$((100 + $ordinal)) >> /mnt/conf.d/server-id.cnf
+          echo server-id=$((100 + $ordinal)) >> /mnt/conf.d/server-id.cnf
           # 如果 Pod 的需要为 0，则是 Master 节点，从 ConfigMap 中将 Master 节点的配置文件拷贝到 /mnt/conf.d/ 目录里
           if [[ $ordinal -eq 0 ]]; then
               cp /mnt/config-map/master.cnf /mnt/conf.d/
