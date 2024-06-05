@@ -42,7 +42,7 @@ spec:
         - name: config-map
           mountPath: /mnt/config-map/
       - name: clone-mysql
-        image: gcr.io/google-samples/xtrabackup:1.0
+        image: registry.aliyuncs.com/google_containers/xtrabackup:1.0
         command:
         - bash
         - "-c"
@@ -96,7 +96,7 @@ spec:
           periodSeconds: 2
           timeoutSeconds: 1
       - name: xtrabackup
-        image: gcr.io/google-samples/xtrabackup:1.0 
+        image: registry.aliyuncs.com/google_containers/xtrabackup:1.0 
         ports:
         - name: xtrabackup
           containerPort: 3307
