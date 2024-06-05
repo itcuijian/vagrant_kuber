@@ -6,7 +6,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: mysql # has to match .spec.template.metadata.labels
+      app: mysql 
   serviceName: "mysql"
   replicas: 3 
   template:
@@ -117,7 +117,7 @@ spec:
               # 如果存在xtrabackup_binlog_info 文件，那就说明备份来自 Master 节点，
               # 解析到 MASTER_LOG_FILE 和 MASTER_LOG_POS 两个字段的值
               [[ `cat xtrabackup_binlog_info` =~ ^(.*?)[[:space:]]+(.*?)$ ]] || exit 1
-              rm xtrabackup_binlog_info
+              rm xtrabackup_binlog_info xtrabackup_slave_info
               # 通过解析到的两个字段的值拼接成一个语句，写入到一个新的文件中
               echo "CHANGE MASTER TO MASTER_LOG_FILE='${BASH_REMATCH[1]}',\
                     MASTER_LOG_POS=${BASH_REMATCH[2]}" > change_master_to.sql.in
