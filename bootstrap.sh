@@ -91,6 +91,12 @@ version = 2
           [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
             SystemdCgroup = true
 EOF
+# 配置自己的 Docker 镜像源
+    # [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
+    #   [plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
+    #     endpoint = ["https://teljlzbk.mirror.aliyuncs.com"]
+    # [plugins."io.containerd.grpc.v1.cri".registry.configs."teljlzbk.mirror.aliyuncs.com".tls]
+    #   insecure_skip_verify = true
 
 # 重启 containerd
 sudo systemctl restart containerd.service
