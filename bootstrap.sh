@@ -47,8 +47,8 @@ deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] h
 EOF
 
 if [ "$1" == "master" ]; then
-  # 安装 Docker kubelet kubeadm helm
-  sudo apt update && apt install -y containerd.io kubelet kubeadm kubectl helm
+  # 安装 Docker kubelet kubeadm helm ipvsadm
+  sudo apt update && apt install -y containerd.io kubelet kubeadm kubectl helm ipvsadm
   # 锁定版本
   sudo apt-mark hold kubeadm kubelet kubectl
 
