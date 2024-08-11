@@ -56,13 +56,13 @@ mkdir -p $HOME/.kube && cp -i /etc/kubernetes/admin.conf $HOME/.kube/config && c
 
 启动了通过 `kubectl get nodes` 指令可以看到集群的 `Master` 节点的状态是 `NotReady` ，通过 `kubectl describe node master` 命令的输出可以看到 `Conditions:` 里面的说明是：`'NetworkPluginNotReady'` ，表明该集群还没有部署网络插件。
 
-根据上面的指示，部署 `Flunnel` 网络插件（当然也可以是其他网络插件）：
+根据上面的指示，部署 `Flannel` 网络插件（当然也可以是其他网络插件）：
 
 ```
 kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
 ```
 
-> 注意：如果需要修改网卡的话，需要在相关容器里添加 `--iface=XXX` 的启动参数
+> 注意：如果需要修改网卡的话，需要在相关上述配置文件里添加 `--iface=XXX` 的启动参数
 
 其他 `Kubernetes` 插件可以参考 `master.sh` 来自己部署。
 
