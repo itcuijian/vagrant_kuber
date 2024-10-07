@@ -12,6 +12,8 @@ kubectl apply -f /vagrant/examples/flannel/kube-flannel.yml
 # kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
 helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
 helm upgrade --install kubernetes-dashboard kubernetes-dashboard/kubernetes-dashboard --create-namespace --namespace kubernetes-dashboard
+# 创建永久 token
+kubectl apply -f dashboard/dashboard-user-token.yaml
 # 启动
 # kubectl -n kubernetes-dashboard port-forward svc/kubernetes-dashboard-kong-proxy 8443:443
 

@@ -75,6 +75,7 @@ fi
 
 # sudo apt-get install -y lvm2
 
+## 配置 containerd
 # 修改 /etc/containerd/config.toml 开启 cri
 # issue: https://github.com/containerd/containerd/issues/8139
 sudo sed -i 's/^disabled_plugins/#&/' /etc/containerd/config.toml 
@@ -91,7 +92,7 @@ version = 2
           [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
             SystemdCgroup = true
 EOF
-# 配置自己的 Docker 镜像源
+# 配置镜像源
     # [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
     #   [plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
     #     endpoint = ["https://teljlzbk.mirror.aliyuncs.com"]
