@@ -418,3 +418,5 @@ extras:
     # ServiceMonitor connection tlsConfig. Defaults to {insecureSkipVerify:true}.
     tlsConfig:
       insecureSkipVerify: true
+extraArgs:
+  - --token-ttl=43200 # 增加这一行，设置 token 过期时间为12小时
