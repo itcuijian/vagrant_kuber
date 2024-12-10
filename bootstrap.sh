@@ -95,8 +95,8 @@ EOF
 # 配置镜像源
     # [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
     #   [plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
-    #     endpoint = ["https://teljlzbk.mirror.aliyuncs.com"]
-    # [plugins."io.containerd.grpc.v1.cri".registry.configs."teljlzbk.mirror.aliyuncs.com".tls]
+    #     endpoint = ["https://dh-mirror.gitverse.ru"]
+    # [plugins."io.containerd.grpc.v1.cri".registry.configs."dh-mirror.gitverse.ru".tls]
     #   insecure_skip_verify = true
 
 # 重启 containerd

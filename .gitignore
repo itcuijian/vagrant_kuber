@@ -56,3 +56,6 @@ Thumbs.db
 
 # config file
 .config.yaml
+
+# cert dir
+cert/
