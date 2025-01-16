@@ -26,7 +26,6 @@ kubectl -n kubernetes-dashboard get svc | grep kubernetes-dashboard-kong-proxy
 
 # 存储插件
 # sudo apt install ceph-common
-
 kubectl apply -f https://raw.githubusercontent.com/rook/rook/master/deploy/examples/crds.yaml
 kubectl apply -f https://raw.githubusercontent.com/rook/rook/master/deploy/examples/common.yaml
 kubectl apply -f https://raw.githubusercontent.com/rook/rook/master/deploy/examples/operator.yaml
