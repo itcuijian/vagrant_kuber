@@ -22,7 +22,7 @@ Vagrant.configure(configs['apiVersion']) do |config|
       end
 
       node.vm.box_check_update = false
-      node.vm.disk :disk, size: "10GB", name: "vdb"
+      node.vm.disk :disk, size: item["disk_size"], name: configs['disk_name']
 
       # 设置同步目录
       node.vm.synced_folder ".", "/vagrant", type: "virtualbox"

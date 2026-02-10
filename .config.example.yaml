@@ -2,6 +2,7 @@
 apiVersion: 2
 # which network is used
 bridge: enp86s0
+disk_name: "vdb"
 nodes:
 - name: "vagrant.kuber.master"
   hostname: master
@@ -12,21 +13,25 @@ nodes:
   cpu: 2
   # virtualbox vbox.memory
   mem: 4096
+  disk_size: "10G"
 - name: "vagrant.kuber.node1"
   hostname: node1
   type: node
   ipAddr: 10.0.0.31
   cpu: 2
   mem: 4096
+  disk_size: "10G"
 - name: "vagrant.kuber.node2"
   hostname: node2
   type: node
   ipAddr: 10.0.0.32
   cpu: 2
   mem: 4096
+  disk_size: "10G"
 - name: "vagrant.kuber.node3"
   hostname: node3
   type: node
   ipAddr: 10.0.0.33
   cpu: 2
   mem: 4096
+  disk_size: "10G"
